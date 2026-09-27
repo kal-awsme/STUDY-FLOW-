@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#eaf4ff">
+  <meta name="description" content="StudyFlow — Know what to study next.">
+  <title>StudyFlow</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- App Shell -->
+  <div id="app" class="app-shell">
+
+    <!-- ==================== HOME ==================== -->
+    <main id="home-view" class="view is-active" aria-labelledby="home-title">
+      <header class="top-header">
+        <div class="brand-mark" aria-label="StudyFlow">
+          <span class="brand-icon" aria-hidden="true">✦</span>
+          <span>StudyFlow</span>
+        </div>
+
+        <button
+          class="icon-button"
+          type="button"
+          data-action="open-settings"
+          aria-label="Open settings"
+        >
+          <span aria-hidden="true">⚙</span>
+        </button>
+      </header>
+
+      <section class="hero-section">
+        <p class="eyebrow" id="greeting-label">Good afternoon</p>
+        <h1 id="home-title">What should I study?</h1>
+        <p class="hero-subtitle">
+          Focus on what matters most right now.
+        </p>
+      </section>
+
+      <!-- Next Priority -->
+      <section class="priority-card card" aria-labelledby="priority-title">
+        <div class="card-heading-row">
+          <div>
+            <p class="section-label">NEXT PRIORITY</p>
+            <h2 id="priority-title">Physics</h2>
+          </div>
+
+          <span id="priority-badge" class="priority-badge priority-high">
+            HIGH PRIORITY
+          </span>
+        </div>
+
+        <div class="priority-meta">
+          <div class="priority-meta-item">
+            <span class="meta-label">Exam</span>
+            <strong id="priority-date">Sep 30</strong>
+          </div>
+
+          <div class="priority-meta-item">
+            <span class="meta-label">Confidence</span>
+            <strong id="priority-confidence">30%</strong>
+          </div>
+
+          <div class="priority-meta-item">
+            <span class="meta-label">Difficulty</span>
+            <strong id="priority-difficulty">Hard</strong>
+          </div>
+        </div>
+
+        <div class="countdown">
+          <span class="countdown-number" id="countdown-number">2</span>
+          <span class="countdown-unit">days left</span>
+        </div>
+
+        <button
+          class="primary-button"
+          type="button"
+          data-action="open-priority"
+        >
+          Study this first
+          <span aria-hidden="true">→</span>
+        </button>
+      </section>
+
+      <!-- Today's Focus -->
+      <section class="section-block" aria-labelledby="focus-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">TODAY</p>
+            <h2 id="focus-title">Today's Focus</h2>
+          </div>
+
+          <button
+            class="text-button"
+            type="button"
+            data-nav="plan"
+          >
+            View plan
+          </button>
+        </div>
+
+        <div class="focus-card card">
+          <div class="focus-icon" aria-hidden="true">◒</div>
+
+          <div class="focus-content">
+            <h3 id="focus-task-title">Review Chapter 4</h3>
+            <p id="focus-task-subtitle">Physics · 25 minutes</p>
+          </div>
+
+          <button
+            class="check-button"
+            type="button"
+            data-action="complete-focus"
+            aria-label="Mark today's focus as complete"
+          >
+            <span aria-hidden="true">✓</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Upcoming Exams -->
+      <section class="section-block" aria-labelledby="upcoming-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">UPCOMING</p>
+            <h2 id="upcoming-title">Exams</h2>
+          </div>
+
+          <button
+            class="text-button"
+            type="button"
+            data-nav="exams"
+          >
+            See all
+          </button>
+        </div>
+
+        <div id="upcoming-exams" class="exam-preview-list">
+          <article class="exam-preview card">
+            <div class="exam-date">
+              <span class="exam-month">SEP</span>
+              <strong class="exam-day">30</strong>
+            </div>
+
+            <div class="exam-info">
+              <h3>Physics</h3>
+              <p>Hard · 30% confidence</p>
+            </div>
+
+            <span class="priority-dot priority-dot-high" aria-label="High priority"></span>
+          </article>
+
+          <article class="exam-preview card">
+            <div class="exam-date">
+              <span class="exam-month">OCT</span>
+              <strong class="exam-day">03</strong>
+            </div>
+
+            <div class="exam-info">
+              <h3>History</h3>
+              <p>Medium · 55% confidence</p>
+            </div>
+
+            <span class="priority-dot priority-dot-medium" aria-label="Medium priority"></span>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== EXAMS ==================== -->
+    <main id="exams-view" class="view" aria-labelledby="exams-title" hidden>
+      <header class="page-header">
+        <div>
+          <p class="section-label">YOUR SCHEDULE</p>
+          <h1 id="exams-title">Exams</h1>
+        </div>
+
+        <button
+          class="icon-button"
+          type="button"
+          data-action="open-add-exam"
+          aria-label="Add exam"
+        >
+          <span aria-hidden="true">＋</span>
+        </button>
+      </header>
+
+      <section class="exam-summary card" aria-label="Exam summary">
+        <div>
+          <span class="meta-label">Upcoming</span>
+          <strong id="exam-count">4 exams</strong>
+        </div>
+
+        <div>
+          <span class="meta-label">Highest priority</span>
+          <strong id="exam-high-count">1</strong>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="exam-list-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">ALL EXAMS</p>
+            <h2 id="exam-list-title">Your subjects</h2>
+          </div>
+
+          <button
+            class="text-button"
+            type="button"
+            data-action="open-add-exam"
+          >
+            + Add
+          </button>
+        </div>
+
+        <div id="exam-list" class="exam-list">
+          <!-- JavaScript will render exam cards here. -->
+        </div>
+
+        <div id="empty-exams" class="empty-state card" hidden>
+          <div class="empty-icon" aria-hidden="true">✦</div>
+          <h3>No exams yet</h3>
+          <p>Add your first exam to start building your study priority.</p>
+          <button
+            class="primary-button"
+            type="button"
+            data-action="open-add-exam"
+          >
+            Add an exam
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== STUDY PLAN ==================== -->
+    <main id="plan-view" class="view" aria-labelledby="plan-title" hidden>
+      <header class="page-header">
+        <div>
+          <p class="section-label">YOUR NEXT STEPS</p>
+          <h1 id="plan-title">Study Plan</h1>
+        </div>
+
+        <span class="date-pill" id="plan-date">Today</span>
+      </header>
+
+      <!-- Progress -->
+      <section class="progress-card card" aria-labelledby="progress-title">
+        <div class="progress-heading">
+          <div>
+            <p class="section-label">TODAY'S PROGRESS</p>
+            <h2 id="progress-title">
+              <span id="progress-percent">0%</span>
+            </h2>
+          </div>
+
+          <div class="progress-count">
+            <strong id="completed-count">0</strong>
+            <span>/</span>
+            <span id="total-task-count">3</span>
+          </div>
+        </div>
+
+        <div class="progress-track" aria-hidden="true">
+          <div
+            id="progress-bar"
+            class="progress-bar"
+            style="width: 0%;"
+          ></div>
+        </div>
+
+        <p id="progress-message" class="progress-message">
+          Start with your first task.
+        </p>
+      </section>
+
+      <!-- Today's Plan -->
+      <section class="section-block" aria-labelledby="today-plan-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">FOCUS SESSION</p>
+            <h2 id="today-plan-title">Today's Plan</h2>
+          </div>
+
+          <span class="time-pill">45 min</span>
+        </div>
+
+        <div id="study-task-list" class="study-task-list">
+          <label class="study-task card">
+            <input type="checkbox" data-task-id="task-1">
+            <span class="custom-checkbox" aria-hidden="true">
+              <span>✓</span>
+            </span>
+
+            <span class="task-content">
+              <strong>Review Chapter 4</strong>
+              <small>Physics · 20 min</small>
+            </span>
+          </label>
+
+          <label class="study-task card">
+            <input type="checkbox" data-task-id="task-2">
+            <span class="custom-checkbox" aria-hidden="true">
+              <span>✓</span>
+            </span>
+
+            <span class="task-content">
+              <strong>Review important formulas</strong>
+              <small>Physics · 10 min</small>
+            </span>
+          </label>
+
+          <label class="study-task card">
+            <input type="checkbox" data-task-id="task-3">
+            <span class="custom-checkbox" aria-hidden="true">
+              <span>✓</span>
+            </span>
+
+            <span class="task-content">
+              <strong>Practice 10 questions</strong>
+              <small>Physics · 15 min</small>
+            </span>
+          </label>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <button
+          class="secondary-button full-width"
+          type="button"
+          data-action="regenerate-plan"
+        >
+          Build a new plan
+          <span aria-hidden="true">✦</span>
+        </button>
+      </section>
+    </main>
+
+    <!-- ==================== BOTTOM NAVIGATION ==================== -->
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button
+        class="nav-item is-active"
+        type="button"
+        data-nav="home"
+        aria-label="Home"
+        aria-current="page"
+      >
+        <span class="nav-icon" aria-hidden="true">⌂</span>
+        <span>Home</span>
+      </button>
+
+      <button
+        class="nav-item"
+        type="button"
+        data-nav="exams"
+        aria-label="Exams"
+      >
+        <span class="nav-icon" aria-hidden="true">▣</span>
+        <span>Exams</span>
+      </button>
+
+      <button
+        class="nav-item"
+        type="button"
+        data-nav="plan"
+        aria-label="Study Plan"
+      >
+        <span class="nav-icon" aria-hidden="true">✓</span>
+        <span>Plan</span>
+      </button>
+    </nav>
+
+    <!-- ==================== ADD / EDIT EXAM MODAL ==================== -->
+    <div
+      id="exam-modal"
+      class="modal-layer"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop" data-action="close-exam-modal"></div>
+
+      <section
+        class="bottom-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="exam-modal-title"
+      >
+        <div class="sheet-handle" aria-hidden="true"></div>
+
+        <header class="sheet-header">
+          <div>
+            <p class="section-label">EXAM DETAILS</p>
+            <h2 id="exam-modal-title">Add exam</h2>
+          </div>
+
+          <button
+            class="icon-button"
+            type="button"
+            data-action="close-exam-modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <form id="exam-form" novalidate>
+          <input type="hidden" id="exam-id" name="id">
+
+          <div class="form-field">
+            <label for="subject">Subject</label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="e.g. Physics"
+              autocomplete="off"
+              required
+            >
+          </div>
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="exam-date-input">Exam date</label>
+              <input
+                id="exam-date-input"
+                name="date"
+                type="date"
+                required
+              >
+            </div>
+
+            <div class="form-field">
+              <label for="difficulty">Difficulty</label>
+              <select id="difficulty" name="difficulty" required>
+                <option value="easy">Easy</option>
+                <option value="medium" selected>Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <div class="field-label-row">
+              <label for="confidence">Confidence</label>
+              <output id="confidence-value" for="confidence">50%</output>
+            </div>
+
+            <input
+              id="confidence"
+              name="confidence"
+              type="range"
+              min="0"
+              max="100"
+              value="50"
+              step="5"
+            >
+          </div>
+
+          <div class="form-field">
+            <label for="notes">Notes <span>(optional)</span></label>
+            <textarea
+              id="notes"
+              name="notes"
+              rows="3"
+              placeholder="Chapters, topics, or anything important..."
+            ></textarea>
+          </div>
+
+          <button class="primary-button full-width" type="submit">
+            Save exam
+          </button>
+        </form>
+      </section>
+    </div>
+
+    <!-- ==================== PRIORITY DETAIL MODAL ==================== -->
+    <div
+      id="priority-modal"
+      class="modal-layer"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop" data-action="close-priority"></div>
+
+      <section
+        class="bottom-sheet priority-detail-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="priority-detail-title"
+      >
+        <div class="sheet-handle" aria-hidden="true"></div>
+
+        <header class="sheet-header">
+          <div>
+            <p class="section-label">NEXT PRIORITY</p>
+            <h2 id="priority-detail-title">Physics</h2>
+          </div>
+
+          <button
+            class="icon-button"
+            type="button"
+            data-action="close-priority"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <div class="priority-detail">
+          <span class="priority-badge priority-high">HIGH PRIORITY</span>
+
+          <div class="priority-detail-stats">
+            <div>
+              <span>Days left</span>
+              <strong id="detail-days-left">2</strong>
+            </div>
+
+            <div>
+              <span>Confidence</span>
+              <strong id="detail-confidence">30%</strong>
+            </div>
+
+            <div>
+              <span>Difficulty</span>
+              <strong id="detail-difficulty">Hard</strong>
+            </div>
+          </div>
+
+          <p id="detail-reason" class="priority-reason">
+            Your exam is approaching and your confidence is still low.
+            This subject should be your main focus.
+          </p>
+
+          <button
+            class="primary-button full-width"
+            type="button"
+            data-action="go-to-plan"
+          >
+            Open study plan
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== SETTINGS MODAL ==================== -->
+    <div
+      id="settings-modal"
+      class="modal-layer"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="modal-backdrop" data-action="close-settings"></div>
+
+      <section
+        class="bottom-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-title"
+      >
+        <div class="sheet-handle" aria-hidden="true"></div>
+
+        <header class="sheet-header">
+          <div>
+            <p class="section-label">PREFERENCES</p>
+            <h2 id="settings-title">Settings</h2>
+          </div>
+
+          <button
+            class="icon-button"
+            type="button"
+            data-action="close-settings"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </header>
+
+        <div class="settings-list">
+          <button class="setting-row" type="button" data-action="reset-data">
+            <span>
+              <strong>Reset local data</strong>
+              <small>Remove saved exams and study progress.</small>
+            </span>
+            <span aria-hidden="true">›</span>
+          </button>
+
+          <div class="setting-row setting-row-static">
+            <span>
+              <strong>StudyFlow</strong>
+              <small>Built for focused study, one priority at a time.</small>
+            </span>
+            <span class="version-label">v1.0</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ==================== TOAST ==================== -->
+    <div
+      id="toast"
+      class="toast"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      hidden
+    ></div>
+
+    <!-- ==================== AI LOADING STATE ==================== -->
+    <div
+      id="ai-loading"
+      class="ai-loading"
+      aria-hidden="true"
+      hidden
+    >
+      <div class="ai-loading-card card">
+        <div class="ai-dots" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <p>Planning your study session…</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
